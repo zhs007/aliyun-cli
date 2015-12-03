@@ -35,21 +35,21 @@ function getEndPoint(endpoint, islocal) {
 }
 
 function newOSS(keyid, accesskey, endpoint, islocal) {
-    let oss = new ALY.OSS({
+    let ossobj = new ALY.OSS({
         accessKeyId: keyid,
         secretAccessKey: accesskey,
         endpoint: getEndPoint(endpoint, islocal),
         apiVersion: '2013-10-15'
     });
 
-    return oss;
+    return ossobj;
 }
 
 // callback(err, data)
-function updFile(oss, bucket, srcfilename, destpath, callback) {
+function updFile(ossobj, bucket, srcfilename, destpath, callback) {
     let buf = fs.readFileSync(srcfilename);
 
-    oss.putObject({
+    ossobj.putObject({
         Bucket: bucket,
         Key: destpath + '/' + srcfilename,
         Body: buf

@@ -8,6 +8,7 @@ var glob = require('glob');
 var async = require('async');
 var basecmd = require('../src/basecmd');
 var oss = require('../src/oss');
+var cdn = require('../src/cdn');
 var argv = require('yargs')
     .option('id', {
         alias : 'id',
@@ -45,6 +46,12 @@ var argv = require('yargs')
         describe: 'islocal',
         type: 'boolean'
     })
+    .option('cdn', {
+        alias : 'cdn',
+        demand: false,
+        describe: 'cdn url',
+        type: 'string'
+    })
     .usage('Usage: oss-cli input-filename')
     .example('oss-cli input-filename', 'oss-cli input-filename')
     .help('h')
@@ -59,7 +66,7 @@ if (basearr == undefined || basearr.length < 1) {
     process.exit(1);
 }
 
-if (!basecmd.checkParams(argv, 'id', 'key', 'bucket', 'osspath', 'endpoint')) {
+if (!basecmd.checkParams(argv, 'id', 'key', 'bucket', 'endpoint')) {
     process.exit(1);
 }
 
@@ -68,13 +75,23 @@ if (argv.hasOwnProperty('islocal')) {
     islocal = argv.islocal;
 }
 
+let osspath = '';
+if (argv.hasOwnProperty('osspath')) {
+    osspath = basecmd.procOSSPath(argv.osspath);
+}
+
+let cdnurl = '';
+if (argv.hasOwnProperty('cdn')) {
+    cdnurl = basecmd.procOSSPath(argv.cdn);
+}
+
 let id = argv.id;
 let key = argv.key;
 let bucket = argv.bucket;
-let osspath = argv.osspath;
 let endpoint = argv.endpoint;
 
 let ossobj = oss.newOSS(id, key, endpoint, islocal);
+let cdnobj = cdn.newCDN(id, key);
 
 let arr = [];
 for (let j = 0; j < basearr.length; ++j) {
@@ -96,7 +113,22 @@ async.eachSeries(arr, function (curfile, callback) {
             console.log('updFile ' + curfile);
         }
 
-        callback();
+        if (cdnurl.length > 0) {
+            let fullcdn = cdnurl + '/' + osspath + '/' + curfile;
+            cdn.refreshFile(cdnobj, cdnurl, osspath + '/' + curfile, function (err, res) {
+                if (err) {
+                    console.log('refurbish CDN ' + fullcdn + ' err ' + JSON.stringify(err));
+                }
+                else {
+                    console.log('refurbish CDN ' + fullcdn);
+                }
+
+                callback();
+            });
+        }
+        else {
+            callback();
+        }
     });
 }, function (err) {
 

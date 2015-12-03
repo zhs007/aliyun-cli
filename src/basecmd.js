@@ -14,4 +14,17 @@ function checkParams(argv) {
     return true;
 }
 
+function procOSSPath(osspath) {
+    while (osspath.charAt(0) == '/') {
+        osspath = osspath.slice(1);
+    }
+
+    while (osspath.charAt(osspath.length - 1) == '/') {
+        osspath = osspath.slice(0, osspath.length - 1);
+    }
+
+    return osspath;
+}
+
 exports.checkParams = checkParams;
+exports.procOSSPath = procOSSPath;
