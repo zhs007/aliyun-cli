@@ -1,0 +1,49 @@
+{
+  "name": "aliyun-cli",
+  "version": "0.1.0",
+  "latest": "0.1.0",
+  "description": "aliyun-cli",
+  "keywords": [
+    "aliyun",
+    "cli",
+    "aliyun-cli",
+    "oss"
+  ],
+  "preferGlobal": true,
+  "config": {
+    "publishtest": false
+  },
+  "homepage": "http://www.heysdk.com/",
+  "author": {
+    "name": "zhs007",
+    "email": "sssxueren@gmail.com",
+    "url": "http://www.heysdk.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhs007/aliyun-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/zhs007/aliyun-cli/issues",
+    "email": "sssxueren@gmail.com"
+  },
+  "directories": {
+    "bin": "./bin"
+  },
+  "main": "./bin/oss-cli.js",
+  "bin": {
+    "oss-cli": "./bin/oss-cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/oss-cli.js"
+  },
+  "dependencies": {
+    "shelljs": "*",
+    "yargs": "*",
+    "glob": "*",
+    "aliyun-sdk": "*",
+    "async": "*"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
