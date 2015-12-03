@@ -40,11 +40,11 @@ oss-cli *.md --id=<accessKeyId> --key=<secretAccessKey> --bucket=<bucket> --ossp
 
 参数定义如下：
 
-* id - 用户自己阿里云配置的 accessKeyId
-* key - 用户自己阿里云配置的 secretAccessKey
-* bucket - 用户自己阿里云的目标 bucket
-* osspath - 可选参数，默认传到根目录，如果需要调整，就是oss上的目录
-* endpoint - oss开通的区域，杭州就是hz，北京就是bj等等
-* islocal - 可选参数，表示是否内网传输，如果从ecs上传文件，可以给true，这样速度会很快，否则给false
-* cdn - 可选参数，如果填了这个参数，表示会同时刷新CDN文件
+* **id** - 用户自己阿里云配置的 accessKeyId
+* **key** - 用户自己阿里云配置的 secretAccessKey
+* **bucket** - 用户自己阿里云的目标 bucket
+* **osspath** - 可选参数，默认传到根目录，如果需要调整，就是oss上的目录
+* **endpoint** - oss开通的区域，杭州就是hz，北京就是bj等等
+* **islocal** - 可选参数，表示是否内网传输，如果从ecs上传文件，可以给true，这样速度会很快，否则给false
+* **cdn** - 可选参数，如果填了这个参数，表示会同时刷新CDN文件
 
