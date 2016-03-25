@@ -108,13 +108,16 @@ for (let j = 0; j < basearr.length; ++j) {
 
 console.log('total file nums is ' + arr.length);
 
+let curindex = 0;
 async.eachSeries(arr, function (curfile, callback) {
     oss.updFile(ossobj, bucket, curfile, osspath, function (err, data) {
+        curindex++;
+
         if (err) {
-            console.log('updFile ' + curfile + ' err ' + JSON.stringify(err));
+            console.log('updFile ' + curindex + ' ' + curfile + ' err ' + JSON.stringify(err));
         }
         else {
-            console.log('updFile ' + curfile);
+            console.log('updFile ' + curindex + ' ' + curfile);
         }
 
         if (cdnurl.length > 0) {
