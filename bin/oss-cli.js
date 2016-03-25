@@ -100,9 +100,13 @@ for (let j = 0; j < basearr.length; ++j) {
         let srcfile = lstfile[i];
         if (fs.existsSync(srcfile)) {
             arr.push(srcfile);
+
+            console.log('parse file ' + srcfile);
         }
     }
 }
+
+console.log('total file nums is ' + arr.length);
 
 async.eachSeries(arr, function (curfile, callback) {
     oss.updFile(ossobj, bucket, curfile, osspath, function (err, data) {
