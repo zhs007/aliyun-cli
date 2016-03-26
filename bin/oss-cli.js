@@ -71,17 +71,17 @@ if (!basecmd.checkParams(argv, 'id', 'key', 'bucket', 'endpoint')) {
 }
 
 let islocal = false;
-if (argv.hasOwnProperty('islocal')) {
+if (argv.hasOwnProperty('islocal') && argv.islocal != undefined) {
     islocal = argv.islocal;
 }
 
 let osspath = '';
-if (argv.hasOwnProperty('osspath')) {
+if (argv.hasOwnProperty('osspath') && argv.osspath != undefined) {
     osspath = basecmd.procOSSPath(argv.osspath);
 }
 
 let cdnurl = '';
-if (argv.hasOwnProperty('cdn')) {
+if (argv.hasOwnProperty('cdn') && argv.cdn != undefined) {
     cdnurl = basecmd.procOSSPath(argv.cdn);
 }
 
@@ -95,13 +95,26 @@ let cdnobj = cdn.newCDN(id, key);
 
 let arr = [];
 for (let j = 0; j < basearr.length; ++j) {
-    let lstfile = glob.sync(basearr[j]);
-    for (var i = 0; i < lstfile.length; ++i) {
-        let srcfile = lstfile[i];
-        if (fs.existsSync(srcfile)) {
-            arr.push(srcfile);
+    if (basecmd.isDir(basearr[j])) {
+        let lstfile = glob.sync(basearr[j] + '/**/*.*');
+        for (var i = 0; i < lstfile.length; ++i) {
+            let srcfile = lstfile[i];
+            if (fs.existsSync(srcfile)) {
+                arr.push(srcfile);
 
-            console.log('parse file ' + srcfile);
+                console.log('parse file ' + srcfile);
+            }
+        }
+    }
+    else {
+        let lstfile = glob.sync(basearr[j]);
+        for (var i = 0; i < lstfile.length; ++i) {
+            let srcfile = lstfile[i];
+            if (fs.existsSync(srcfile)) {
+                arr.push(srcfile);
+
+                console.log('parse file ' + srcfile);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 "use strict";
 
+var fs = require('fs');
+
 function checkParams(argv) {
     if (arguments.length > 1) {
         for (let i = 1; i < arguments.length; ++i) {
@@ -26,5 +28,15 @@ function procOSSPath(osspath) {
     return osspath;
 }
 
+function isDir(strpath) {
+    if (fs.existsSync(strpath)) {
+        let stat = fs.statSync(strpath);
+        return stat.isDirectory();
+    }
+
+    return false;
+}
+
 exports.checkParams = checkParams;
 exports.procOSSPath = procOSSPath;
+exports.isDir = isDir;
