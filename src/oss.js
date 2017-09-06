@@ -1,6 +1,7 @@
 "use strict";
 
 var ALY = require('aliyun-sdk');
+var mime = require('mime-types')
 var util = require('util');
 var fs = require('fs');
 
@@ -52,6 +53,7 @@ function updFile(ossobj, bucket, srcfilename, destpath, callback) {
     ossobj.putObject({
         Bucket: bucket,
         Key: destpath + '/' + srcfilename,
+        ContentType: mime.lookup(srcfilename) || '',
         Body: buf
     }, function (err, data) {
         callback(err, data);

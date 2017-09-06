@@ -42,7 +42,8 @@
     "yargs": "*",
     "glob": "*",
     "aliyun-sdk": "*",
-    "async": "*"
+    "async": "*",
+    "mime-types": "*"
   },
   "license": "MIT",
   "readmeFilename": "README.md"
