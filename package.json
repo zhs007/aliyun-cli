@@ -1,7 +1,7 @@
 {
   "name": "aliyun-cli",
-  "version": "0.2.3",
-  "latest": "0.2.3",
+  "version": "0.2.4",
+  "latest": "0.2.4",
   "description": "aliyun-cli",
   "keywords": [
     "aliyun",
@@ -42,7 +42,8 @@
     "yargs": "*",
     "glob": "*",
     "aliyun-sdk": "*",
-    "async": "*"
+    "async": "*",
+    "mime-types": "*"
   },
   "license": "MIT",
   "readmeFilename": "README.md"
