@@ -16,6 +16,7 @@
  * **oss-cli** 增加对同步CDN刷新功能
  * **oss-cli** 里，调整 **osspath** 为非必填参数，不带该参数，将默认传到根目录下
  * **oss-cli** 里，增加对 **osspath** 参数容错处理，会自动去除不必要的 **/** 字符
+ * **oss-cli** 根据上传文件的 **mime-type** 自动设置 **content-type**
 
 * **0.1.0**
  * **oss-cli** 的支持
